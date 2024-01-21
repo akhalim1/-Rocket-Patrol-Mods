@@ -104,6 +104,7 @@ class Play extends Phaser.Scene {
       this.p1Score,
       scoreConfig
     );
+
     // gameover flag
     this.gameOver = false;
 
@@ -133,6 +134,27 @@ class Play extends Phaser.Scene {
       null,
       this
     );
+
+    // display timer
+    let timerConfig = {
+      fontFamily: "Courier",
+      fontSize: "28px",
+      backgroundColor: "#F3B141",
+      color: "#843605",
+      align: "right",
+      padding: {
+        top: 5,
+        bottom: 5,
+      },
+      fixedWidth: 100,
+    };
+
+    this.timeLeft = this.add.text(
+      borderUISize + borderPadding * 40,
+      borderUISize + borderPadding * 2,
+      game.settings.gameTimer,
+      timerConfig
+    );
   }
 
   update() {
@@ -146,6 +168,12 @@ class Play extends Phaser.Scene {
     }
 
     if (!this.gameOver) {
+      // updating the timer
+      let elapsedTime = Math.floor(
+        (game.settings.gameTimer - this.clock.getElapsed()) / 1000
+      );
+      this.timeLeft.text = elapsedTime;
+
       this.p1Rocket.update(); // update rocket sprite
       this.ship01.update(); // update spaceships (x3)
       this.ship02.update();
