@@ -196,7 +196,6 @@ class Play extends Phaser.Scene {
       this.p1Rocket.reset();
       this.shipExplode(this.ship03);
     }
-
     if (this.checkCollision(this.p1Rocket, this.ship02)) {
       this.p1Rocket.reset();
       this.shipExplode(this.ship02);
@@ -241,10 +240,15 @@ class Play extends Phaser.Scene {
 
     this.sound.play("sfx-explosion");
 
+    // hit handler is here
     this.adjustTime(PLUS_TIME);
   }
 
   adjustTime(seconds) {
     this.clock.elapsed -= seconds * 1000;
+  }
+
+  missHandler() {
+    this.adjustTime(-MINUS_TIME);
   }
 }
