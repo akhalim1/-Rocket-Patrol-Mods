@@ -67,6 +67,8 @@ class Menu extends Phaser.Scene {
       // easy mode
       game.settings = {
         spaceshipSpeed: 1,
+        // new spaceship speed here
+        newSpaceshipSpeed: 2,
         gameTimer: 60000,
       };
 
@@ -78,6 +80,8 @@ class Menu extends Phaser.Scene {
       // hard mode
       this.game.settings = {
         spaceshipSpeed: 4,
+        // new spaceship speed here
+        newSpaceshipSpeed: 8,
         gameTimer: 45000,
       };
 
@@ -97,6 +101,7 @@ class Menu extends Phaser.Scene {
 
     this.load.image("explosion3", "./assets/explosion3.png");
 
+    this.load.image("newspaceship", "./assets/newspaceship.png");
     this.load.spritesheet("explosion", "./assets/explosion.png", {
       frameWidth: 64,
       frameHeight: 32,

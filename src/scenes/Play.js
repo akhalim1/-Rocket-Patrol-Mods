@@ -79,6 +79,16 @@ class Play extends Phaser.Scene {
       10
     ).setOrigin(0, 0);
 
+    // new spaceship here
+    this.newSpaceship = new NewSpaceship(
+      this,
+      game.config.width + borderUISize * 5,
+      borderUISize * 4,
+      "newspaceship",
+      0,
+      60
+    ).setOrigin(0, 0);
+
     keyFIRE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
     keyRESET = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
     keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -183,6 +193,8 @@ class Play extends Phaser.Scene {
       this.ship01.update(); // update spaceships (x3)
       this.ship02.update();
       this.ship03.update();
+
+      this.newSpaceship.update(); // update spec
     }
 
     this.starfield.tilePositionX -= 1;
@@ -191,6 +203,8 @@ class Play extends Phaser.Scene {
     this.ship01.update(); // update spaceships (x3)
     this.ship02.update();
     this.ship03.update();
+
+    this.newSpaceship.update(); // update spec
 
     if (this.checkCollision(this.p1Rocket, this.ship03)) {
       this.p1Rocket.reset();
@@ -204,6 +218,11 @@ class Play extends Phaser.Scene {
     if (this.checkCollision(this.p1Rocket, this.ship01)) {
       this.p1Rocket.reset();
       this.shipExplode(this.ship01);
+    }
+
+    if (this.checkCollision(this.p1Rocket, this.newSpaceship)) {
+      this.p1Rocket.reset();
+      this.shipExplode(this.newSpaceship);
     }
   }
 
