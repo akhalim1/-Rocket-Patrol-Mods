@@ -240,6 +240,18 @@ class Play extends Phaser.Scene {
 
     this.sound.play("sfx-explosion");
 
+    // particle emitter explosion called here
+    const emitter = this.add.particles(ship.x, ship.y, "explosion3", {
+      //frame: ["red", "yellow", "green"],
+      lifespan: 4000,
+      speed: { min: 150, max: 250 },
+      scale: { start: 0.8, end: 0 },
+      gravityY: 150,
+      blendMode: "ADD",
+      emitting: false,
+    });
+
+    emitter.explode(16);
     // hit handler is here
     this.adjustTime(PLUS_TIME);
   }
