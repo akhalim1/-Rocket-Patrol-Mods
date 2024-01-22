@@ -1,3 +1,6 @@
+const PLUS_TIME = 10;
+const MINUS_TIME = 5;
+
 class Play extends Phaser.Scene {
   constructor() {
     super("playScene");
@@ -172,7 +175,9 @@ class Play extends Phaser.Scene {
       let elapsedTime = Math.floor(
         (game.settings.gameTimer - this.clock.getElapsed()) / 1000
       );
+
       this.timeLeft.text = elapsedTime;
+      // this.timeLeft.text = elapsedTime;
 
       this.p1Rocket.update(); // update rocket sprite
       this.ship01.update(); // update spaceships (x3)
@@ -235,5 +240,11 @@ class Play extends Phaser.Scene {
     this.scoreLeft.text = this.p1Score;
 
     this.sound.play("sfx-explosion");
+
+    this.adjustTime(PLUS_TIME);
+  }
+
+  adjustTime(seconds) {
+    this.clock.elapsed -= seconds * 1000;
   }
 }
