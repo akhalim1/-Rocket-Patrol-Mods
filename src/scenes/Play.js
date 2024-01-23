@@ -87,7 +87,9 @@ class Play extends Phaser.Scene {
       "newspaceship",
       0,
       60
-    ).setOrigin(0, 0);
+    )
+      .setOrigin(0, 0)
+      .setScale(0.5);
 
     keyFIRE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
     keyRESET = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
