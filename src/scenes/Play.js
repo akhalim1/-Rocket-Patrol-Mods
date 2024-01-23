@@ -7,6 +7,13 @@ class Play extends Phaser.Scene {
   }
 
   create() {
+    // bgm
+    let musicConfig = {
+      loop: true,
+    };
+    this.bgm = this.sound.add("bgm", musicConfig);
+    this.bgm.play();
+    //this.music.play();
     this.starfield = this.add
       .tileSprite(0, 0, 640, 480, "starfield")
       .setOrigin(0, 0);
@@ -170,12 +177,35 @@ class Play extends Phaser.Scene {
       game.settings.gameTimer,
       timerConfig
     );
+
+    // fire text
+
+    let fireTextConfig = {
+      fontFamily: "Courier",
+      fontSize: "28px",
+      backgroundColor: "#F3B141",
+      color: "#843605",
+      align: "center",
+      padding: {
+        top: 5,
+        bottom: 5,
+      },
+      // fixedWidth: 100,
+    };
+
+    this.fireText = this.add.text(
+      borderUISize + borderPadding * 25,
+      borderUISize + borderPadding * 2,
+      "FIRE",
+      fireTextConfig
+    );
   }
 
   update() {
     // check key input for restart
     if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyRESET)) {
       this.scene.restart();
+      this.bgm.stop();
     }
 
     if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
@@ -189,7 +219,6 @@ class Play extends Phaser.Scene {
       );
 
       this.timeLeft.text = elapsedTime;
-      // this.timeLeft.text = elapsedTime;
 
       this.p1Rocket.update(); // update rocket sprite
       this.ship01.update(); // update spaceships (x3)
@@ -235,6 +264,8 @@ class Play extends Phaser.Scene {
       rocket.y < ship.y + ship.height &&
       rocket.height + rocket.y > ship.y
     ) {
+      // disable fireText on hit
+      this.toggleFireText(false);
       return true;
     } else {
       return false;
@@ -279,6 +310,10 @@ class Play extends Phaser.Scene {
 
   adjustTime(seconds) {
     this.clock.elapsed -= seconds * 1000;
+  }
+
+  toggleFireText(bool) {
+    this.fireText.visible = bool;
   }
 
   missHandler() {

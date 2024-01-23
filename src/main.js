@@ -10,7 +10,8 @@ Display the time remaining (in seconds) on the screen (3)
 Implement the 'FIRE' UI text from the original game (1)
 Add your own (copyright-free) looping background music to the Play scene (keep the volume low and be sure that multiple instances of your music don't play when the game restarts) (1)
 
-Citations?
+Citations:
+Audio File: "Scheming Weasel Faster" by Kevin MacLeod
 
 */
 
